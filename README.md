@@ -1,13 +1,15 @@
-# THE BOOK JOURNAL
+# THE BOOK JOURNAL — Cloud beta
 
-Первая рабочая версия интерфейса. Данные сохраняются **только в localStorage текущего браузера**. Не используйте её как единственное хранилище важных данных. В настройках есть экспорт и импорт JSON.
+Private book translation tracker with Supabase Auth + RLS-protected `journal_data` JSON storage.
 
-## Размещение на GitHub Pages
+Deploy `index.html`, `manifest.webmanifest`, `icon.svg` to the root of GitHub Pages.
 
-Загрузите `index.html`, `manifest.webmanifest` и `icon.svg` в корень ветки `main` репозитория `the-book-journal`. В Settings → Pages выберите Deploy from a branch → main → / (root).
+Before deployment: run `01_secure_database.sql` in Supabase SQL Editor; create a user in Authentication > Users and disable public sign-ups.
 
-Адрес: https://tvorchestvolana-alt.github.io/the-book-journal/
+Supabase Authentication > URL Configuration: Site URL = https://tvorchestvolana-alt.github.io/the-book-journal/ ; add this exact URL to Redirect URLs.
 
-## Ограничения прототипа
+Only the publishable key is embedded in the public frontend. Never commit service_role/secret keys or user data.
 
-Нет Supabase, входа, приватных файлов, истории изменений, полноценной корзины, версий материалов и статистики по периодам. GitHub Pages — публичный сайт. Не добавляйте в исходники персональные материалы или ключи.
+First login can offer migration of legacy local browser data if the cloud account is empty. Export JSON from old version before updating.
+
+Known limitations: one JSON document per user (1 MiB database limit); no private file upload yet; simple last-write-wins cloud saves; avoid simultaneous editing in multiple tabs.
